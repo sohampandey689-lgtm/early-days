@@ -1,0 +1,21 @@
+{
+    "name": "Drogon C++ Development Environment",
+    "image": "://microsoft.com",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:1": {
+            "configureZshAsDefaultShell": true
+        }
+    },
+    "onCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential cmake git uuid-dev zlib1g-dev libssl-dev libjsoncpp-dev",
+    "updateContentCommand": "if [ ! -d \"drogon\" ]; then git clone https://github.com && cd drogon && git submodule update --init && mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc) && sudo make install && cd ../..; fi",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake"
+            ]
+        }
+    },
+    "forwardPorts": [8080]
+}
